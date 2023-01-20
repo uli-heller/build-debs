@@ -14,7 +14,7 @@ done
 #CODENAME="$(cat /etc/lsb-release|grep CODENAME|cut -d= -f2)"
 #test -z "${CODENAME}" && CODENAME="$(cat /etc/lsb-release|grep RELEASE|cut -d= -f2)"
 CODENAME=any
-NEW_VERSION="${VERSION}-0dp10~${CODENAME}0"
+NEW_VERSION="${VERSION}-0uh01~${CODENAME}0"
 NEW_VERSION1="1:${NEW_VERSION}"
 
 rm -rf opt usr
