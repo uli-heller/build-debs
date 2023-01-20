@@ -10,8 +10,8 @@ if [ -s "${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.bz2" ]; then
 #  RC=0
 else
   echo >"${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.bz2.urls" "${URL}"
-  #echo "Lade herunter '${URL}'"
-  curl -s -C "${URL}" >"${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.bz2"
+  echo >&2 "Lade herunter '${URL}'"
+  curl -s "${URL}" >"${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.bz2"
   echo "${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.bz2"
   RC=0
 fi
