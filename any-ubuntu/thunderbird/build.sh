@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-set -x
+#set -x
 
 # thunderbird-102.1.0esr.tar.bz2
 THUNDERBIRD_TAR_BZ2="$1"
