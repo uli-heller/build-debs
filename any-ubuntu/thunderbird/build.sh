@@ -5,6 +5,9 @@ set -e
 
 # thunderbird-102.1.0esr.tar.bz2
 THUNDERBIRD_TAR_BZ2="$1"
+BUILDID="$2"
+test -z "${BUILDID}" && BUILDID=uh
+
 VERSION="$(basename "${THUNDERBIRD_TAR_BZ2}" .tar.bz2|cut -d"-" -f2-)"
 
 for c in alien fakeroot; do
@@ -14,7 +17,7 @@ done
 #CODENAME="$(cat /etc/lsb-release|grep CODENAME|cut -d= -f2)"
 #test -z "${CODENAME}" && CODENAME="$(cat /etc/lsb-release|grep RELEASE|cut -d= -f2)"
 CODENAME=any
-NEW_VERSION="${VERSION}-0uh01~${CODENAME}0"
+NEW_VERSION="${VERSION}-0${BUILDID}01~${CODENAME}0"
 NEW_VERSION1="1:${NEW_VERSION}"
 
 rm -rf opt usr

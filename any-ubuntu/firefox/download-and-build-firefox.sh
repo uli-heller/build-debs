@@ -6,5 +6,5 @@ T="$(readlink -f "$0")"
 TD="$(dirname "${T}")"
 
 TBZ2="$("${TD}/download-firefox.sh")" && {
-  "${TD}/build-firefox.sh" "${TBZ2}"
+  "${TD}/build-firefox.sh" "${TBZ2}" "$1"
 }
