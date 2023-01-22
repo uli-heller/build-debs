@@ -1,0 +1,8 @@
+Package: fake-python3-apport
+Version: 0.1dp02
+Architecture: all
+Conflicts: python3-apport
+Breaks: python3-apport
+Provides: python3-apport
+Description: Ban python3-apport while satisfying ubuntu-minimal dependency
+Maintainer: Vitaly _Vi Shukela <vi0oss@gmail.com>

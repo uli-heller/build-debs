@@ -1,0 +1,8 @@
+Package: fake-ubuntu-advantage-desktop-daemon
+Version: 0.1dp02
+Architecture: all
+Conflicts: ubuntu-advantage-desktop-daemon
+Breaks: ubuntu-advantage-desktop-daemon
+Provides: ubuntu-advantage-desktop-daemon
+Description: Ban ubuntu-advantage-desktop-daemon while satisfying ubuntu-minimal dependency
+Maintainer: Vitaly _Vi Shukela <vi0oss@gmail.com>
