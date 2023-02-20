@@ -3,12 +3,12 @@
 set -e
 #set -x
 
-# betterbird-102.1.0esr.tar.bz2
+# betterbird-102.8.0-bb30.de.linux-x86_64.tar.bz2
 BETTERBIRD_TAR_BZ2="$1"
 BUILDID="$2"
 test -z "${BUILDID}" && BUILDID=uh
 
-VERSION="$(basename "${BETTERBIRD_TAR_BZ2}" .tar.bz2|cut -d"-" -f2-)"
+VERSION="$(basename "${BETTERBIRD_TAR_BZ2}" .de.linux-x86_64.tar.bz2|cut -d"-" -f2-)"
 
 for c in alien fakeroot; do
   which "${c}" >/dev/null || { echo >&2 "'${c}' nicht gefunden!"; exit 1; }
@@ -41,7 +41,7 @@ override_dh_strip_nondeterminism:
 #
 EOF
 
-echo >betterbird-${NEW_VERSION1}/debian/changelog~ "betterbird (${NEW_VERSION1}) jammy; urgency=low"
+echo >betterbird-${NEW_VERSION1}/debian/changelog~ "betterbird (${NEW_VERSION1}) ${CODENAME}; urgency=low"
 tail -n+2 betterbird-${NEW_VERSION1}/debian/changelog >>betterbird-${NEW_VERSION1}/debian/changelog~
 mv betterbird-${NEW_VERSION1}/debian/changelog~ betterbird-${NEW_VERSION1}/debian/changelog
 
