@@ -1,0 +1,8 @@
+Package: fake-libc-234
+Version: 0.1dp01
+Architecture: all
+#Conflicts: python3-apport
+#Breaks: python3-apport
+Provides: libc6 (=2.34)
+Description: Dummy libc6
+Maintainer: Uli Heller <uli.heller@daemons-point.com>
