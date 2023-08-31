@@ -8,7 +8,7 @@ D="$(dirname "$0")"
 
 # betterbird-102.8.0-bb30.de.linux-x86_64.tar.bz2
 # betterbird-115.0-bb6.en-US.linux-x86_64.tar.bz2
-BETTERBIRD_TAR_BZ2="$1"
+BETTERBIRD_TAR_BZ2="$(realpath "$1")"
 BUILDID="$2"
 test -z "${BUILDID}" && BUILDID=uh
 
@@ -81,6 +81,7 @@ EOF
     rm -rf "betterbird-${NEW_VERSION1}"
 
     cp "${TMP_BETTERBIRD_DP_TAR_BZ2}" "${BETTERBIRD_DP_TAR_BZ2}"
+    cp *deb "$(dirname "${BETTERBIRD_DP_TAR_BZ2}")"
 )
 RC=$?
 cleanUp
