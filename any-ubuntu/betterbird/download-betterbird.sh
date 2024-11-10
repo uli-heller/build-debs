@@ -1,10 +1,12 @@
 #!/bin/sh
+#set -x
 BASE_URL="https://www.betterbird.eu/downloads/"
 HREFS="$(curl -s "${BASE_URL}"|grep -o 'href="[^"]*"')"
-BETTERBIRD_VERSION="$(echo "${HREFS}"|grep "LinuxArchive.*de.linux-x86_64"|grep -o "betterbird-[^-]*-"|cut -d- -f2|sort -V|tail -1)"
-RELATIVE_URL="$(echo "${HREFS}"|grep "LinuxArchive.*${BETTERBIRD_VERSION}.*de.linux-x86_64"|tail -1|cut -d'=' -f2|tr -d '"')"
+BETTERBIRD_VERSION="$(echo "${HREFS}"|grep "de.linux-x86_64"|grep -o "betterbird-[^-]*-"|cut -d- -f2|sort -V|tail -1)"
+RELATIVE_URL="$(echo "${HREFS}"|grep "${BETTERBIRD_VERSION}.*de.linux-x86_64"|tail -1|cut -d'=' -f2|tr -d '"')"
 URL="${BASE_URL}${RELATIVE_URL}"
 TARBZ2="$(basename "${RELATIVE_URL}")"
+#exit 1
 if [ -s "${HOME}/Downloads/${TARBZ2}" ]; then
   echo >&2 "Bereits vorhanden: '${URL}'"
   RC=1
