@@ -3,6 +3,9 @@ build-debs
 
 Hilfsskripte zum Bauen von DEB-Paketen.
 
+DEBs aus .tar.{bz2,gz,xz}
+-------------------------
+
 Name       |Bauen mit ...                       |Beispiel                                
 -----------|------------------------------------|----------------------------------------------
 betterbird |download-and-build-betterbird.sh uh |betterbird_128.5.2esr-bb19+uh01~any0_amd64.deb
