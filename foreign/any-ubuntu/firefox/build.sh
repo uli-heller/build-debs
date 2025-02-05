@@ -4,11 +4,12 @@ set -e
 #set -x
 
 # firefox-102.1.0esr.tar.bz2
-FIREFOX_TAR_BZ2="$1"
+# firefox-135.0esr.tar.xz
+FIREFOX_TAR_XZ="$1"
 BUILDID="$2"
 test -z "${BUILDID}" && BUILDID=uh
 
-VERSION="$(basename "${FIREFOX_TAR_BZ2}" .tar.bz2|cut -d"-" -f2-)"
+VERSION="$(basename "${FIREFOX_TAR_XZ}" .tar.xz|cut -d"-" -f2-)"
 
 for c in alien fakeroot; do
   which "${c}" >/dev/null || { echo >&2 "'${c}' nicht gefunden!"; exit 1; }
@@ -22,7 +23,7 @@ NEW_VERSION1="1:${NEW_VERSION}"
 
 rm -rf opt usr
 rm -rf firefox
-bzip2 -cd "${FIREFOX_TAR_BZ2}"|tar -xf -
+xz -cd "${FIREFOX_TAR_XZ}"|tar -xf -
 mkdir opt
 mv firefox opt
 (
@@ -31,10 +32,10 @@ mv firefox opt
   tar cf - .
 )|tar xf -
 
-FIREFOX_DP_TAR_BZ2="$(echo "${FIREFOX_TAR_BZ2}"|sed -e 's/.tar.bz2$/.dp.tar.bz2/')"
-tar -cvf - opt usr|bzip2 -c9 >"${FIREFOX_DP_TAR_BZ2}"
+FIREFOX_DP_TAR_XZ="$(echo "${FIREFOX_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
+tar -cvf - opt usr|bzip2 -c9 >"${FIREFOX_DP_TAR_XZ}"
 
-fakeroot alien -d "${FIREFOX_DP_TAR_BZ2}" -v --version=${NEW_VERSION1} -g
+fakeroot alien -d "${FIREFOX_DP_TAR_XZ}" -v --version=${NEW_VERSION1} -g
 
 cat >>firefox-${NEW_VERSION1}/debian/rules <<EOF
 override_dh_strip_nondeterminism:
