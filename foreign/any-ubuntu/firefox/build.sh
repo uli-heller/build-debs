@@ -33,7 +33,7 @@ mv firefox opt
 )|tar xf -
 
 FIREFOX_DP_TAR_XZ="$(echo "${FIREFOX_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
-tar -cvf - opt usr|bzip2 -c9 >"${FIREFOX_DP_TAR_XZ}"
+tar -cvf - opt usr|xz -c9 >"${FIREFOX_DP_TAR_XZ}"
 
 fakeroot alien -d "${FIREFOX_DP_TAR_XZ}" -v --version=${NEW_VERSION1} -g
 
