@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-#set -x
+set -x
 
 BN="$(basename "$0")"
 D="$(dirname "$0")"
