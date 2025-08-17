@@ -31,10 +31,10 @@ mv thunderbird opt
   tar cf - .
 )|tar xf -
 
-THUNDERBIRD_DP_TAR_XZ="$(echo "${THUNDERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
-tar -cvf - opt usr|xz -c9 >"${THUNDERBIRD_DP_TAR_XZ}"
+THUNDERBIRD_DP_TAR_BZ2="$(echo "${THUNDERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.bz2/')"
+tar -cvf - opt usr|bzip2 -c9 >"${THUNDERBIRD_DP_TAR_BZ2}"
 
-fakeroot alien -d "${THUNDERBIRD_DP_TAR_XZ}" -v --version=${NEW_VERSION1} -g
+fakeroot alien -d "${THUNDERBIRD_DP_TAR_BZ2}" -v --version=${NEW_VERSION1} -g
 
 cat >>thunderbird-${NEW_VERSION1}/debian/rules <<EOF
 override_dh_strip_nondeterminism:
