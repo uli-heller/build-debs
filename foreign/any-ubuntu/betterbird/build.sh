@@ -55,11 +55,11 @@ cp -r "${D}/build-addons" "${TMPDIR}/."
         tar cf - .
     )|tar xf -
 
-    TMP_BETTERBIRD_DP_TAR_XZ="$(echo "${TMP_BETTERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
-    BETTERBIRD_DP_TAR_XZ="$(echo "${BETTERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
-    tar -cvf - opt usr|xz -c9 >"${TMP_BETTERBIRD_DP_TAR_XZ}"
+    TMP_BETTERBIRD_DP_TAR_BZ2="$(echo "${TMP_BETTERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.bz2/')"
+    BETTERBIRD_DP_TAR_BZ2="$(echo "${BETTERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.bz2/')"
+    tar -cvf - opt usr|bzip2 -c9 >"${TMP_BETTERBIRD_DP_TAR_BZ2}"
 
-    fakeroot alien -d "${TMP_BETTERBIRD_DP_TAR_XZ}" -v --version=${NEW_VERSION1} -g
+    fakeroot alien -d "${TMP_BETTERBIRD_DP_TAR_BZ2}" -v --version=${NEW_VERSION1} -g
 
     cat >>betterbird-${NEW_VERSION1}/debian/rules <<EOF
 override_dh_strip_nondeterminism:
@@ -80,8 +80,8 @@ EOF
     rm -rf opt usr
     rm -rf "betterbird-${NEW_VERSION1}"
 
-    cp "${TMP_BETTERBIRD_DP_TAR_XZ}" "${BETTERBIRD_DP_TAR_XZ}"
-    cp *deb "$(dirname "${BETTERBIRD_DP_TAR_XZ}")"
+    cp "${TMP_BETTERBIRD_DP_TAR_BZ2}" "${BETTERBIRD_DP_TAR_BZ2}"
+    cp *deb "$(dirname "${BETTERBIRD_DP_TAR_BZ2}")"
 )
 RC=$?
 cleanUp
