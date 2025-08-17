@@ -4,11 +4,11 @@ set -e
 #set -x
 
 # thunderbird-102.1.0esr.tar.bz2
-THUNDERBIRD_TAR_BZ2="$1"
+THUNDERBIRD_TAR_XZ="$1"
 BUILDID="$2"
 test -z "${BUILDID}" && BUILDID=uh
 
-VERSION="$(basename "${THUNDERBIRD_TAR_BZ2}" .tar.bz2|cut -d"-" -f2-)"
+VERSION="$(basename "${THUNDERBIRD_TAR_XZ}" .tar.xz|cut -d"-" -f2-)"
 
 for c in alien fakeroot; do
   which "${c}" >/dev/null || { echo >&2 "'${c}' nicht gefunden!"; exit 1; }
@@ -22,7 +22,7 @@ NEW_VERSION1="1:${NEW_VERSION}"
 
 rm -rf opt usr
 rm -rf thunderbird
-bzip2 -cd "${THUNDERBIRD_TAR_BZ2}"|tar -xf -
+xz -cd "${THUNDERBIRD_TAR_XZ}"|tar -xf -
 mkdir opt
 mv thunderbird opt
 (
@@ -31,10 +31,10 @@ mv thunderbird opt
   tar cf - .
 )|tar xf -
 
-THUNDERBIRD_DP_TAR_BZ2="$(echo "${THUNDERBIRD_TAR_BZ2}"|sed -e 's/.tar.bz2$/.dp.tar.bz2/')"
-tar -cvf - opt usr|bzip2 -c9 >"${THUNDERBIRD_DP_TAR_BZ2}"
+THUNDERBIRD_DP_TAR_XZ="$(echo "${THUNDERBIRD_TAR_XZ}"|sed -e 's/.tar.xz$/.dp.tar.xz/')"
+tar -cvf - opt usr|xz -c9 >"${THUNDERBIRD_DP_TAR_XZ}"
 
-fakeroot alien -d "${THUNDERBIRD_DP_TAR_BZ2}" -v --version=${NEW_VERSION1} -g
+fakeroot alien -d "${THUNDERBIRD_DP_TAR_XZ}" -v --version=${NEW_VERSION1} -g
 
 cat >>thunderbird-${NEW_VERSION1}/debian/rules <<EOF
 override_dh_strip_nondeterminism:
