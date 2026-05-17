@@ -1,4 +1,5 @@
 #!/bin/sh
+BN="$(basename "$0")"
 
 #
 # Stand 2023-02-01 gibt es diese Firefox-Versionen:
@@ -19,6 +20,11 @@
 #
 BASE_URL="https://download-installer.cdn.mozilla.net/pub/firefox/releases/"
 FIREFOX_VERSION="$(curl -s "${BASE_URL}"|grep -o "/pub/firefox/releases/[0-9.]*/"|xargs -n1 basename|sort -V|tail -1)"
+test -z "${FIREFOX_VERSION}" && {
+    echo >&2 "${BN}: Kann aktuelle Firefox-Version nicht ermitteln"
+    exit 1
+}
+
 URL="${BASE_URL}${FIREFOX_VERSION}/linux-x86_64/de/firefox-${FIREFOX_VERSION}.tar.xz"
 if [ -s "${HOME}/Downloads/firefox-${FIREFOX_VERSION}.tar.xz" ]; then
   echo >&2 "Bereits vorhanden: '${URL}'"
