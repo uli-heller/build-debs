@@ -3,6 +3,11 @@
 BASE_URL="https://www.betterbird.eu/downloads/"
 HREFS="$(curl -s "${BASE_URL}"|grep -o 'href="[^"]*"')"
 BETTERBIRD_VERSION="$(echo "${HREFS}"|grep "de.linux-x86_64"|grep -o "betterbird-[^-]*-"|cut -d- -f2|sort -V|tail -1)"
+test -z "${BETTERBIRD_VERSION}" && {
+    echo >&2 "${BN}: Kann aktuelle Betterbird-Version nicht ermitteln"
+    exit 1
+}
+
 RELATIVE_URL="$(echo "${HREFS}"|grep "${BETTERBIRD_VERSION}.*de.linux-x86_64"|tail -1|cut -d'=' -f2|tr -d '"')"
 URL="${BASE_URL}${RELATIVE_URL}"
 TARBZ2="$(basename "${RELATIVE_URL}")"
