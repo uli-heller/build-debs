@@ -2,7 +2,7 @@
 
 #         https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/128.0esr/linux-x86_64/de/thunderbird-128.0esr.tar.bz2
 BASE_URL="https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/"
-THUNDERBIRD_VERSION="$(curl -s "${BASE_URL}"|grep -o "/pub/thunderbird/releases/[0-9][0-9.]*[^/]*/"|grep -v "/12[579]"|grep -v "/13[0-9]"|grep -v "/14[1-9]"|grep -v "/15[0-2]"|grep -v "b[^/]*/$"|xargs -n1 basename|sort -V|tail -1)"
+THUNDERBIRD_VERSION="$(curl -s "${BASE_URL}"|grep -o "/pub/thunderbird/releases/[0-9][0-9.]*[^/]*/"|grep -v "/12[579]"|grep -v "/13[0-9]"|grep -v "/14[1-9]"|grep -v "/15[0-6]"|grep -v "b[^/]*/$"|xargs -n1 basename|sort -V|tail -1)"
 test -z "${THUNDERBIRD_VERSION}" && {
     echo >&2 "${BN}: Kann aktuelle Thunderbird-Version nicht ermitteln"
     exit 1
